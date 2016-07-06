@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>Your Conflicting Results</h1>
+  <hr>
+
+  <h2 class="text-center strongest py1 my2">Strongest value: <em>{{strongest.capitalize()}}</em></h2>
+
+  <div class="types">
+  {% for key in totals %}
+    <div class="type p1">
+      <h4>{{key.capitalize()}}</h4>
+      <span class="text-center">{{totals[key]}}</span>
+    </div>
+  {% endfor %}
+  </div>
+
+  <a href="{{url_for('quiz')}}">
+    <button class="btn btn-info btn-lg">
+      Take the Test Again!
+    </button>
+  </a>
+{% endblock content %}

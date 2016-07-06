@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Conflicting Quiz! | Trials and Tribulations of the Fifth Kind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bower/bootstrap/dist/css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+<body>
+
+  <div class="container mb3">
+    <div class="row">
+      <div class="card pb2 col-sm-10 col-sm-offset-1">
+        {% block content %}{% endblock content %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

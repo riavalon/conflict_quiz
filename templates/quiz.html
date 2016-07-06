@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2 class="mb2">Choose which statement applies to you most!</h2>
+<hr>
+
+<form class="px2" action="{{ url_for('quiz') }}" method="POST">
+
+  {% for question in questions %}
+  <h3 class="h3 mt3 mb1">Question {{question['question_num']}}</h3>
+  <div class="form-group">
+    <label>
+      <input type="radio" value="a" name="{{question['question_num']}}" /> {{question['a']}}
+    </label>
+  </div>
+
+  <div class="form-group mb3">
+    <label>
+      <input type="radio" value="b" name="{{question['question_num']}}" /> {{question['b']}}
+    </label>
+  </div>
+
+  <hr>
+  {% endfor %}
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <button type="submit" class="btn btn-block submit btn-success btn-lg">
+        {% if not last %}
+        Next
+        {% else %}
+        Submit
+        {% endif %}
+      </button>
+    </div>
+  </div>
+</form>
+{% endblock content %}
