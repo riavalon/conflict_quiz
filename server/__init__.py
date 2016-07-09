@@ -1,10 +1,21 @@
-import csv
+import csv, os
 
-from flask import Flask, render_template, request, g
+from flask import (Flask, render_template, request, g,
+                   send_from_directory)
 
 
 app = Flask(__name__)
 TYPES = ['persuade', 'compel', 'avoid/accommodate', 'collaborate', 'negotiate', 'support']
+BASE_URL = os.path.abspath(os.path.dirname('wsgi.py'))
+print(BASE_URL)
+CLIENT_APP_FOLDER = os.path.join(BASE_URL, 'client')
+
+
+# Setup routes to find front end react app
+@app.route('/js/<path:filename>')
+def client_app_app_folder(filename):
+    print(filename)
+    return send_from_directory(os.path.join(CLIENT_APP_FOLDER, 'js'), filename)
 
 
 @app.route('/')
