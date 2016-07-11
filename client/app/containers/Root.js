@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import axios from 'axios';
+
+import {getQuestionsAsync} from '../actions';
 
 
 class RootContainer extends Component {
+	constructor(props) {
+		super(props);
+		this.props.getQuestions();
+	}
 	render() {
-		axios.get('/api/questions')
-		.then(response => console.log(response));
 		return (
 			<div>
 				<h1 class="title text-center">
@@ -31,4 +37,14 @@ class RootContainer extends Component {
 	}
 }
 
-export default RootContainer;
+const mapStateToProps = function() { return {} };
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		getQuestions: getQuestionsAsync
+	}, dispatch);
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(RootContainer);
