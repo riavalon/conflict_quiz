@@ -53,18 +53,18 @@ class Quiz extends Component {
 		);
 	}
 
-	handleSubmit(answers) {
-		const idx = answers.length - 1;
-		const finalAnswer = answers[idx];
+	handleSubmit(answerList) {
+		const idx = answerList.length - 1;
+		const finalAnswer = answerList[idx];
 
 
 		if (finalAnswer && Object.keys(finalAnswer)[0] === '45') {
-			this.props.addAnswers(answers);
-			const {answers, calculateTotals} = this.props;
-			calculateTotals(answers);
+			this.props.addAnswers(answerList);
+			const {answers} = this.props;
+      this.props.calculateTotals(answers);
 			hashHistory.push('/results');
 		} else {
-			this.props.addAnswers(answers);
+			this.props.addAnswers(answerList);
 			const newPointer = this.state.pointer + 9;
 			this.setState({
 				pointer: newPointer,
@@ -87,7 +87,8 @@ class Quiz extends Component {
 
 const mapStateToProps = state => {
 	return {
-		questions: state.questions
+    questions: state.questions,
+    answers: state.answers
 	};
 };
 
