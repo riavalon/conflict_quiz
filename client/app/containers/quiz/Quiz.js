@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {hashHistory} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 
 import {
 	getQuestionsAsync,
@@ -43,6 +43,7 @@ class Quiz extends Component {
 		const current = this._getQuestionSet();
 		return (
 			<div>
+				<Link to="/">Home</Link>
 				<h2 class="mb2">Choose which statement applies to you most!</h2>
 				<hr />
 				<QuestionGroup
@@ -61,7 +62,7 @@ class Quiz extends Component {
 		if (finalAnswer && Object.keys(finalAnswer)[0] === '45') {
 			this.props.addAnswers(answerList);
 			const {answers} = this.props;
-      this.props.calculateTotals(answers);
+			this.props.calculateTotals(answers);
 			hashHistory.push('/results');
 		} else {
 			this.props.addAnswers(answerList);
@@ -87,8 +88,8 @@ class Quiz extends Component {
 
 const mapStateToProps = state => {
 	return {
-    questions: state.questions,
-    answers: state.answers
+		questions: state.questions,
+		answers: state.answers
 	};
 };
 
