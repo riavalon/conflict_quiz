@@ -1,7 +1,7 @@
 import csv, os
 
 from flask import (Flask, render_template, request, g,
-                   send_from_directory, jsonify)
+                   send_from_directory, jsonify, send_file)
 
 
 app = Flask(__name__)
@@ -26,6 +26,12 @@ def index():
 def questions():
     questions = get_questions()
     return jsonify(questions)
+
+
+@app.route('/files/types/<skill_type>')
+def get_skilltype_pdf(skill_type):
+    stype = skill_type.lower().replace('/', '_')
+    return send_file('static/types/{}.pdf'.format(stype))
 
 
 @app.route('/api/quiz', methods=('POST', ))

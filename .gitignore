@@ -5,3 +5,4 @@ static/bower/
 
 client/node_modules/
 client/js/
+.DS_Store
