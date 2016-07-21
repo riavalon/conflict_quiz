@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {compose, createStore, combineReducers, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import {Route, Router, hashHistory} from 'react-router';
 import {syncHistoryWithStore, routerReducer} from 'react-router-redux';
@@ -13,11 +13,17 @@ import Quiz from './containers/quiz/Quiz';
 import Results from './containers/results/Results';
 
 
-const logger = createLogger();
-const store = createStore(
-	reducers,
-	applyMiddleware(thunk, logger));
+const middlewares = [thunk];
 
+if (process.env.NODE_ENV === 'development') {
+	const logger = createLogger({
+		level: 'info',
+		collapsed: true,
+	});
+	middlewares.push(logger);
+}
+
+const store = compose(applyMiddleware(...middlewares))(createStore)(reducers);
 const history = syncHistoryWithStore(hashHistory, store);
 
 render(
