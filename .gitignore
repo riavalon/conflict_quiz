@@ -1,8 +1,8 @@
 *.pyc
-venv/
+server/venv/
 __pycache__/
-static/bower/
+server/static/bower/
 
-client/node_modules/
+node_modules/
 client/js/
 .DS_Store

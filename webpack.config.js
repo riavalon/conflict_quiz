@@ -7,12 +7,12 @@ module.exports = {
 
 	context: __dirname,
 
-	entry: ['./app/main.js'],
+	entry: ['./client/app/main.js'],
 
 	devtool: 'source-map',
 
 	output: {
-		path: path.join(__dirname, 'js'),
+		path: path.join(__dirname, 'client/js'),
 		filename: 'bundle.js'
 	},
 
