@@ -33,24 +33,15 @@ export class HeaderComponent extends Component {
           </div>
         </div>
 
+		<hr />
+
         <div class="row my2">
           <div class="col-sm-10 col-sm-offset-1">
-            <h1 class="strongest-type caps">{strongest}</h1>
+            <h1 class="strongest-type text-center caps">{strongest}</h1>
           </div>
         </div>
 
-        <div class="row my2">
-          <div class="col-sm-4 col-sm-offset-1">
-            <a href={`/files/types/${filename}`} download>
-              <button class="btn btn-lg btn-block btn-success">
-                Download
-              </button>
-            </a>
-          </div>
-          <div class="col-sm-6">
-            <h4 class="">Download the details of your results as a PDF</h4>
-          </div>
-        </div>
+		<hr />
       </div>
     );
   }

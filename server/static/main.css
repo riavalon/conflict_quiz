@@ -13,6 +13,10 @@ body {
   box-shadow: 5px 5px rgba(0,0,0,0.1);
 }
 
+.bold {
+	font-weight: bolder;
+}
+
 .types {
   width: 100%;
   display: flex;
@@ -93,3 +97,41 @@ body {
 .pb1 { padding-bottom: 1em; }
 .pb2 { padding-bottom: 2em; }
 .pb3 { padding-bottom: 3em; }
+
+.caps {
+	text-transform: uppercase;
+}
+
+h1.strongest-type {
+	padding: 1rem;
+	background-color: #f1f1f1;
+	font-weight: bolder;
+}
+
+ul.list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul.list li {
+	display block;
+	padding: 0.5rem 2rem;
+	background: #f1f1f1;
+	margin: 0.8rem 0;
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,0.04);
+}
+
+ul.list li:nth-of-type(odd) {
+	background: #f7f7f7;
+}
+
+ul.list li span.typekey {
+	float: left;
+	font-weight: bolder;
+}
+
+ul.list li span.typetotal {
+	float: right;
+}

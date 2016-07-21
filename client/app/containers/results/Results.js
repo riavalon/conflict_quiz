@@ -23,7 +23,7 @@ class Results extends Component {
 		return keys.map((key, idx) => {
 			return (
 				<li key={idx}>
-					{key}: {totals[key]}
+					<span class="caps typekey">{key}:</span> <span class="typetotal">{totals[key]}</span>
 				</li>
 			);
 		});
@@ -32,21 +32,33 @@ class Results extends Component {
 	render() {
 		const {strongest} = this.props.totals;
 		const typeList = this.getTypes()
+		const filename = strongest.replace('/', '_');
 		return (
 			<div>
 				<Link to="/">Home</Link>
 
-        <HeaderComponent strongest={strongest} />
+				<HeaderComponent strongest={strongest} />
 
 				<div class="row my2">
-          <ArticleComponent />
+					<ArticleComponent />
+				</div>
+
+				<div class="row my2">
+					<div class="col-xs-8 col-xs-offset-2">
+						<h3 class="text-center bold">Download the details of your results as a PDF</h3>
+						<a href={`/files/types/${filename}`} download>
+							<button class="btn btn-lg btn-block btn-success">
+								Download
+							</button>
+						</a>
+					</div>
 				</div>
 
 				<hr />
 
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
-						<h3 class="text-center my2">Your Totals</h3>
+						<h3 class="text-center mb1">Your Totals</h3>
 					</div>
 				</div>
 
@@ -61,14 +73,13 @@ class Results extends Component {
 				<hr />
 
 				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1 text-center">
+					<div class="col-xs-6 col-xs-offset-3 text-center">
 						<h3>Want to retake the quiz?</h3>
-						<button class="btn btn-info btn-lg">
+						<Link to="/quiz" class="btn btn-info btn-block btn-lg">
 							Quiz Me!
-						</button>
+						</Link>
 					</div>
 				</div>
-
 			</div>
 		);
 	}

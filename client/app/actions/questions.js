@@ -7,7 +7,6 @@ export function getQuestionsAsync() {
 	return dispatch => {
 		axios.get('/api/questions')
 		.then(response => {
-			console.log(dispatch);
 			dispatch({
 				type: GET_QUESTIONS,
 				payload: response.data
