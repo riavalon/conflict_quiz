@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const webpack = require('webpack');
 
 
 module.exports = {
@@ -33,6 +34,11 @@ module.exports = {
 	resolve: {
 		modulesDirectories: ['node_modules'],
 		extensions: ['', '.js']
-	}
+	},
 
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+		}),
+	],
 };
