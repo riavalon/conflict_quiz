@@ -40,7 +40,7 @@ class Results extends Component {
 				<HeaderComponent strongest={strongest} />
 
 				<div class="row my2">
-					<ArticleComponent />
+					<ArticleComponent strength={filename} />
 				</div>
 
 				<div class="row my2">

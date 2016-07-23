@@ -1,7 +1,7 @@
 body {
   background: #f7f7f7;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1p 1px rgba(0,0,0,0.004);
 }
@@ -134,4 +134,18 @@ ul.list li span.typekey {
 
 ul.list li span.typetotal {
 	float: right;
+}
+
+ol.list {
+	margin: 2rem 0;
+}
+
+ol.list li {
+	margin: 1rem 0;
+	padding: 1rem;
+	background: #f1f1f1;
+}
+
+ol.list li:nth-of-type(odd) {
+	background: #f7f7f7;
 }
