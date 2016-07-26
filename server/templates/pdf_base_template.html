@@ -1,0 +1,64 @@
+{% extends 'pdf_layout.html' %}
+
+{% block content %}
+{% if totals %}
+<div>
+  <div class="row mb2">
+    <div class="col-sm-10 col-sm-offset-1">
+      <h2 class="text-center">Your Results</h2>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row my2">
+    <div class="col-sm-10 col-sm-offset-1">
+      <h1 class="strongest-type text-center caps">{{strongest}}</h1>
+    </div>
+  </div>
+
+  <hr />
+</div>
+{% endif %}
+
+<div class="row my1">
+  <div class="row">
+    <div class="col-xs-12">
+      {% block article %}{% endblock article %}
+    </div>
+  </div>
+</div>
+
+<hr />
+
+{% if totals %}
+<div class="row my1">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h2>Your Overall Totals</h2>
+      <ul class="list">
+        {% for k, v in totals.items() %}
+        <li>
+          <span class="caps typekey">{{k}}:</span> <span class="typetotal">{{v}}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr />
+{% endif %}
+
+<div class="row my1">
+  <div class="row">
+    <div class="col-xs-12">
+      {% if totals %}
+      <h1 class="caps bold text-center my1">About Other Types</h1>
+      {% endif %}
+      {{other_types | safe}}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

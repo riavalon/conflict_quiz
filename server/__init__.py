@@ -1,14 +1,22 @@
 import csv, os
 
+import pdfkit
+
 from flask import (Flask, render_template, request, g,
-                   send_from_directory, jsonify, send_file)
+                   send_from_directory, jsonify, send_file,
+                   session)
+
+from .sessions import ItsdangerousSessionInterface
 
 
 app = Flask(__name__)
+app.secret_key = '234sdfasdfawefasef98sdfiuadsfjasdfusad89fjsadfas'
+app.session_interface = ItsdangerousSessionInterface()
 TYPES = ['persuade', 'compel', 'avoid/accommodate', 'collaborate', 'negotiate', 'support']
 BASE_URL = os.path.abspath(os.path.dirname('wsgi.py'))
 CLIENT_APP_FOLDER = os.path.join(BASE_URL, 'client')
 SERVER_APP_FOLDER = os.path.join(BASE_URL, 'server')
+TEMP_PDF_ROUTE = os.path.join(SERVER_APP_FOLDER, 'static/pdftemplates/out.pdf')
 
 
 # Setup routes to find front end react app
@@ -19,7 +27,7 @@ def client_app_app_folder(filename):
 
 @app.route('/')
 def index():
-    return render_template('index.html', message="Hello, world!")
+    return render_template('index.html')
 
 
 @app.route('/api/questions')
@@ -28,10 +36,17 @@ def questions():
     return jsonify(questions)
 
 
-@app.route('/files/types/<skill_type>')
-def get_skilltype_pdf(skill_type):
-    stype = skill_type.lower().replace('/', '_')
-    return send_file('static/types/{}.pdf'.format(stype))
+@app.route('/files/type')
+def get_skilltype_pdf():
+    error = generate_pdf_template()
+    if error:
+        print(error)
+        return jsonify(error)
+    else:
+        response = send_file(TEMP_PDF_ROUTE)
+        if os.path.exists(TEMP_PDF_ROUTE):
+            os.remove(TEMP_PDF_ROUTE)
+        return response
 
 
 @app.route('/api/quiz', methods=('POST', ))
@@ -56,7 +71,36 @@ def quiz():
             answer_key[key['num']] = {'a': key['a'], 'b': key['b']}
 
         totals = calculate_totals(answer_key, data)
+    session['totals'] = totals[0]
+    session['strongest'] = totals[1]
     return jsonify(totals);
+
+
+def generate_pdf_template():
+    if 'totals' in session and 'strongest' in session:
+        options = dict(quiet='')
+        strongest = session['strongest'].replace('/', ' ').title()
+        other_templates = get_other_type_articles()
+        template = render_template('{}.html'.format(strongest), totals=session['totals'],
+                                   strongest=session['strongest'], other_types=other_templates)
+        css = [os.path.join(SERVER_APP_FOLDER, 'static/main.css')];
+        pdfkit.from_string(template, TEMP_PDF_ROUTE, css=css, options=options)
+        return False
+    else:
+        return dict(
+            success=False,
+            message='No global totals var.. set a session')
+
+
+def get_other_type_articles():
+    strongest = session['strongest']
+    remaining = [x for x in TYPES if x != strongest]
+    templates = []
+    for item in remaining:
+        template = render_template('{}.html'.format(
+            item.replace('/', '_')))
+        templates.append(template)
+    return ''.join(templates)
 
 
 def calculate_totals(answer_key, answers):

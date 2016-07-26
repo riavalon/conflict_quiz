@@ -46,7 +46,7 @@ class Results extends Component {
 				<div class="row my2">
 					<div class="col-xs-8 col-xs-offset-2">
 						<h3 class="text-center bold">Download the details of your results as a PDF</h3>
-						<a href={`/files/types/${filename}`} download>
+						<a href="/files/type" download>
 							<button class="btn btn-lg btn-block btn-success">
 								Download
 							</button>

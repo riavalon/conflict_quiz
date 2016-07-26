@@ -1,0 +1,14 @@
+<div class="row my2">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h2>Your Overall Totals</h2>
+      <ul class="list">
+        {% for k, v in totals.items() %}
+        <li>
+          <span class="caps typekey">{{k}}:</span> <span class="typetotal">{{v}}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
