@@ -79,9 +79,10 @@ def quiz():
 def generate_pdf_template():
     if 'totals' in session and 'strongest' in session:
         options = dict(quiet='')
-        strongest = session['strongest'].replace('/', ' ').title()
+        filename = session['strongest']
+        strongest = filename.replace('/', ' ').title()
         other_templates = get_other_type_articles()
-        template = render_template('{}.html'.format(strongest), totals=session['totals'],
+        template = render_template('{}.html'.format(filename), totals=session['totals'],
                                    strongest=session['strongest'], other_types=other_templates)
         css = [os.path.join(SERVER_APP_FOLDER, 'static/main.css')];
         pdfkit.from_string(template, TEMP_PDF_ROUTE, css=css, options=options)
