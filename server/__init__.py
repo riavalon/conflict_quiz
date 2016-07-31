@@ -1,4 +1,5 @@
-import csv, os
+import csv
+import os
 
 import pdfkit
 

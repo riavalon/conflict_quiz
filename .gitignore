@@ -6,3 +6,4 @@ server/static/bower/
 node_modules/
 client/js/
 .DS_Store
+*.log
