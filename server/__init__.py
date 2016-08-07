@@ -6,12 +6,12 @@ import pdfkit
 from flask_restful import Resource, Api
 from flask import Flask, render_template, send_from_directory
 
-from controllers.pdf import Pdf
-from controllers.quiz import Quiz
-from controllers.questions import Questions
+from server.controllers.pdf import Pdf
+from server.controllers.quiz import Quiz
+from server.controllers.questions import Questions
 
-from utils.sessions import ItsdangerousSessionInterface
-from utils.static_file import StaticFile
+from server.utils.sessions import ItsdangerousSessionInterface
+from server.utils.static_file import StaticFile
 
 app = Flask(__name__)
 app.secret_key = '234sdfasdfawefasef98sdfiuadsfjasdfusad89fjsadfas'
