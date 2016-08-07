@@ -20,7 +20,7 @@ class Results extends Component {
 
 	getTypes() {
 		const totals = this.props.totals.totals;
-		const keys = Object.keys(totals);
+		const keys = Object.keys(totals).sort();
 		return keys.map((key, idx) => {
 			return (
 				<li key={idx}>
