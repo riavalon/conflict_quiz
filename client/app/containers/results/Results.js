@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {clearAnswers} from '../../actions';
+// import {clearAnswers} from '../../actions';
 
 import {
   HeaderComponent,
@@ -16,6 +16,7 @@ class Results extends Component {
 
 		this.getTypes = this.getTypes.bind(this);
 	}
+
 
 	getTypes() {
 		const totals = this.props.totals.totals;
@@ -87,12 +88,12 @@ class Results extends Component {
 
 const mapStateToProps = state => {
 	return {
-		totals: state.totals
+		totals: state.totals,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators(clearAnswers, dispatch);
+	return {};
 };
 
 Results = connect(

@@ -2,10 +2,10 @@ import os
 
 import pdfkit
 
-from flask import session
+from flask import session, render_template, send_file
 from flask_restful import Resource
 
-from server.utils.constants import TEMP_PDF_ROUTE, TYPES
+from server.utils.constants import SERVER_APP_FOLDER, TEMP_PDF_ROUTE, TYPES
 
 
 class Pdf(Resource):
@@ -24,12 +24,18 @@ class Pdf(Resource):
     def generate_pdf_template(self):
         if 'totals' in session and 'strongest' in session:
             options = dict(quiet='')
-            filename = session['strongest']
+            calculated_type = session['strongest']
+            filename = calculated_type.replace('/', '_')
             strongest = filename.replace('/', ' ').title()
             other_templates = self.get_other_type_articles()
-            template = render_template('{}.html'.format(filename), totals=session['totals'],
-                                       strongest=session['strongest'], other_types=other_templates)
-            css = [os.path.join(SERVER_APP_FOLDER, 'static/main.css')];
+            alpha_keys = [key for key in session['totals'].keys()]
+            alpha_keys.sort()
+            template = render_template('{}.html'.format(filename),
+                                       totals=session['totals'],
+                                       alpha_keys=alpha_keys,
+                                       strongest=session['strongest'],
+                                       other_types=other_templates)
+            css = [os.path.join(SERVER_APP_FOLDER, 'static/css/main.css')];
             pdfkit.from_string(template, TEMP_PDF_ROUTE, css=css, options=options)
             return False
         else:

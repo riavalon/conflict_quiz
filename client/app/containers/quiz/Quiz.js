@@ -58,10 +58,9 @@ class Quiz extends Component {
 		const idx = answerList.length - 1;
 		const finalAnswer = answerList[idx];
 
-
 		if (finalAnswer && Object.keys(finalAnswer)[0] === '45') {
 			this.props.addAnswers(answerList);
-			const {answers} = this.props;
+			const answers = this.props.answers.concat(answerList);
 			this.props.calculateTotals(answers);
 			hashHistory.push('/results');
 		} else {

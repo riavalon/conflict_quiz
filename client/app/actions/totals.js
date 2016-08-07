@@ -11,8 +11,8 @@ export function calculateTotals(answers) {
 			dispatch({
 				type: NEW_TOTALS,
 				payload: {
-					totals: data[0],
-					strongest: data[1]
+					totals: data['totals'],
+					strongest: data['strongest']
 				}
 			});
 		});

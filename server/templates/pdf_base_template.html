@@ -37,11 +37,11 @@
     <div class="col-xs-10 col-xs-offset-1">
       <h2>Your Overall Totals</h2>
       <ul class="list">
-        {% for k, v in totals.items() %}
-        <li>
-          <span class="caps typekey">{{k}}:</span> <span class="typetotal">{{v}}</span>
-        </li>
-        {% endfor %}
+		{% for key in alpha_keys %}
+			<li>
+				<span class="caps typekey">{{key}}</span> <span class="typetotal">{{totals[key]}}</span>
+			</li>
+		{% endfor %}
       </ul>
     </div>
   </div>

@@ -28,10 +28,12 @@ class Quiz(Resource):
             for key in keys:
                 answer_key[key['num']] = {'a': key['a'], 'b': key['b']}
 
-            totals = self.calculate_totals(answer_key, data)
-        session['totals'] = totals[0]
-        session['strongest'] = totals[1]
-        return totals
+            totals, strongest = self.calculate_totals(answer_key, data)
+        session['totals'] = totals
+        session['strongest'] = strongest
+        return dict(
+            totals=totals,
+            strongest=strongest)
 
     def calculate_totals(self, answer_key, answers):
         totals = {k: 0 for k in TYPES}
